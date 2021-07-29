@@ -1,65 +1,30 @@
-# Multi Machine automated deployment
+# Jenkins
 
-## Sparta Node Sample App
+## Building a New Project
 
-## Description
+Simple steps need to be taken to build a new project. 
 
-This app is intended for use with the Sparta Global Devops Stream as a sample app. You can clone the repo and use it as is but no changes will be accepted on this branch. 
-
-To use the repo within your course you should fork it.
-
-The app is a node app with three pages.
-- trigger webhook
-### Homepage
-
-``localhost:3000``
-
-Displays a simple homepage displaying a Sparta logo and message. This page should return a 200 response.
-
-### Blog
-
-``localhost:3000/posts``
-
-This page displays a logo and 100 randomly generated blog posts. The posts are generated during the seeding step.
-
-This page and the seeding is only accessible when a database is available and the DB_HOST environment variable has been set with it's location.
-
-### A fibonacci number generator
-
-``localhost:3000/fibonacci/{index}``
-
-This page has be implemented poorly on purpose to produce a slow running function. This can be used for performance testing and crash recovery testing.
-
-The higher the fibonacci number requested the longer the request will take. A very large number can crash or block the process.
-
-
-### Hackable code
-
-``localhost:3000/hack/{code}``
-
-There is a commented route that opens a serious security vulnerability. This should only be enabled when looking at user security and then disabled immediately afterwards
-
-## Usage
-
-Clone the app
-
+- Firstly select `new Item`, enter the name of a project, in this case `eng89 Shervin`. This is a `freestyle project`.
+- Enter a Description. E.g 'jenkins server for project'.
+- Ensure to select the checkbox labelled `Discard old build` and to enter 3 in `	Max # of builds to keep`.
+- Scroll to bottom of page and select dropdown menu labelled `Add build step`, select `Execute shell`.
+- Enter code to be run initially when build is run. This can be seen below. Then apply and save.
+##### Execute Shell
+```python
+uname -a
+pwd
 ```
-npm install
-npm start
+- Hover over project and select `build now`, then select `console output` in history. 
+- If successful the following message will be seen in the last line. `Finished: SUCCESS`.
+
+## Triggering Separate Project
+- Follow steps above and create a new project with a different name. e.g `eng89 shervin pipeline`.
+- Select `configure` on first build.
+- scroll to `Post-Build Actions` and select `Build other projects`.
+- Now run first project and if successful the following message will be seen in the console output.
+```python
+Triggering a new build of eng89 Shervin pipeline
+Finished: SUCCESS
 ```
-
-You can then access the app on port 3000 at one of the urls given above.
-
-## Tests
-
-There is a basic test framework available that uses the Mocha/Chai framework
-
-```
-npm test
-```
-
-The test for posts will fail ( as expected ) if the database has not been correctly setup.
-
-
 
 
